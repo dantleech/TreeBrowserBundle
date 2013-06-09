@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\Options;
 use Symfony\Cmf\Bundle\TreeBrowserBundle\Tree\TreeInterface;
 
 use Doctrine\Bundle\PHPCRBundle\Form\DataTransformer\DocumentToPathTransformer;
+use Doctrine\ODM\PHPCR\DocumentManager;
 
 class TreeModelType extends AbstractType
 {
@@ -26,15 +27,15 @@ class TreeModelType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->addModelTransformer(new DocumentToPathTransformer($options['document_manager']));
+        $builder->addModelTransformer(new DocumentToPathTransformer($this->dm));
     }
 
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         parent::buildView($view, $form, $options);
         $view->vars['tree'] = $this->tree;
-        $view->vars['root_node'] = $form->getAttribute('root_node');
-        $view->vars['select_root_node'] = $form->getAttribute('select_root_node');
+        $view->vars['root_node'] = $options['root_node'];
+        $view->vars['select_root_node'] = $options['select_root_node'];
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
@@ -50,6 +51,6 @@ class TreeModelType extends AbstractType
 
     public function getName()
     {
-        return 'cmf_phpcr_odm_tree';
+        return 'cmf_tree_phpcr_odm';
     }
 }

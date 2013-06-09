@@ -16,10 +16,6 @@ class PhpcrOdmTreeTest extends \PHPUnit_Framework_TestCase
             'Symfony\Component\Translation\TranslatorInterface'
         );
 
-        $this->assetsHelper = $this->getMockBuilder(
-            'Symfony\Component\Templating\Helper\CoreAssetsHelper'
-        )->disableOriginalConstructor()->getMock();
-
         $this->document1 = new \stdClass;
         $this->document2 = new \stdClass;
         $this->document3 = new FoobarClass;
@@ -31,7 +27,6 @@ class PhpcrOdmTreeTest extends \PHPUnit_Framework_TestCase
         return new PhpcrOdmTree(
             $this->dm,
             $this->translator,
-            $this->assetsHelper,
             $mapping
         );
     }
@@ -277,12 +272,6 @@ class PhpcrOdmTreeTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetNodeTypes($options)
     {
-        $this->assetsHelper->expects($this->any())
-            ->method('getUrl')
-            ->will($this->returnCallback(function ($url) {
-                return $url;
-            }));
-
         $res = $this->getTreeInstance($options['mapping'])->getNodeTypes();
 
         $this->assertEquals($options['expected'], $res);

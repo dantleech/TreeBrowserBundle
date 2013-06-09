@@ -19,7 +19,13 @@ class TreeModelTypeTest extends \PHPUnit_Framework_TestCase
 
         $this->optionsResolver = $this->getMock('Symfony\Component\OptionsResolver\OptionsResolverInterface');
 
-        $this->type = new TreeModelType;
+        $this->dm = $this->getMockBuilder(
+            'Doctrine\ODM\PHPCR\DocumentManager'
+        )->disableOriginalConstructor()->getMock();
+
+        $this->tree = $this->getMock('Symfony\Cmf\Bundle\TreeBrowserBundle\Tree\TreeInterface');
+
+        $this->type = new TreeModelType($this->dm, $this->tree);
     }
 
     public function testBuildForm()
@@ -27,17 +33,18 @@ class TreeModelTypeTest extends \PHPUnit_Framework_TestCase
         $this->formBuilder->expects($this->once())
             ->method('addModelTransformer');
 
-        $this->formBuilder->expects($this->exactly(2))
-            ->method('setAttribute');
-
-        $options = array();
+        $options = array(
+            'root_node' => '/foobar',
+            'select_root_node' => false,
+        );
         $this->type->buildForm($this->formBuilder, $options);
     }
 
     public function testBuildView()
     {
         $options = array(
-            'root' => '/',
+            'root_node' => '/',
+            'select_root_node' => false,
             'create_in_overlay' => false,
             'edit_in_overlay' => false,
         );

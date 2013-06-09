@@ -5,7 +5,7 @@
 
     <services>
 
-        <service id="cmf_tree_browser.controller_prototype" class="Symfony\Cmf\Bundle\TreeBrowserBundle\Controller\TreeBrowserController" abstract="true">
+        <service id="cmf_tree_browser.controller_prototype" class="Symfony\Cmf\Bundle\TreeBrowserBundle\Controller\TreeController" abstract="true">
             <argument/> <!-- tree implementation -->
         </service>
 

@@ -31,6 +31,13 @@ class PhpcrOdmTree implements TreeInterface
         'folder' => 'bundles/cmftreebrowser/images/folder.png',
     );
 
+    protected $options = array(
+        // @todo: Implement these.
+        'confirm_move' => false,
+        'edit_in_overlay' => false,
+        'create_in_overlay' => false,
+    );
+
     /**
      * @var DocumentManager
      */
@@ -42,11 +49,6 @@ class PhpcrOdmTree implements TreeInterface
     private $translator;
 
     /**
-     * @var CoreAssetsHelper
-     */
-    private $assetHelper;
-
-    /**
      * List of the valid class names that may be used as tree "ref" fields
      * @var array
      */
@@ -55,13 +57,11 @@ class PhpcrOdmTree implements TreeInterface
     public function __construct(
         DocumentManager $dm, 
         TranslatorInterface $translator, 
-        CoreAssetsHelper $assetHelper, 
-        array $mapping
+        array $mapping = array()
     )
     {
         $this->dm = $dm;
         $this->translator = $translator;
-        $this->assetHelper = $assetHelper;
         $this->mapping = $mapping;
     }
 
@@ -237,7 +237,7 @@ class PhpcrOdmTree implements TreeInterface
         
         $result['undefined'] = array(
             'icon' => array(
-                'image' => $this->assetHelper->getUrl($this->icons['undefined']),
+                'image' => $this->icons['undefined'],
             ),
             'valid_children' => 'all',
             'routes' => array(),
@@ -264,7 +264,7 @@ class PhpcrOdmTree implements TreeInterface
             $routes = array();
 
             $result[$normalizedClassName] = array(
-                'icon' => array('image' => $this->assetHelper->getUrl($icon)),
+                'icon' => array('image' => $icon),
                 'label' => $className,
                 'valid_children' => $mapping,
                 'routes' => $routes

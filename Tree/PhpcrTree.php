@@ -15,7 +15,7 @@ use PHPCR\PropertyType;
  * @author Nacho Martín <nitram.ohcan@gmail.com>
  * @author David Buchmann <david@liip.ch>
  */
-class PHPCRTree implements TreeInterface
+class PhpcrTree implements TreeInterface
 {
     /**
      * @var \PHPCR\SessionInterface

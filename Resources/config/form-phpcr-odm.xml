@@ -7,12 +7,12 @@
     <services>
         <service 
             id="cmf_tree_browser.form.type.phpcr_odm.tree_model" 
-            class="Symfony\Cmf\Bundle\TreeBrowser\Form\Type\TreeModelType"
+            class="Symfony\Cmf\Bundle\TreeBrowserBundle\Form\Type\TreeModelType"
             >
 
             <!-- @todo: change this to a manager registry injection -->
             <argument type="service" id="doctrine_phpcr.odm.default_document_manager"/>
-            <argument type="service" id="cmf_tree_browser.doctrine_phpcr.phpcrodm_tree" />
+            <argument type="service" id="cmf_tree_browser.phpcr_odm_tree" />
 
             <tag name="form.type" alias="cmf_tree_phpcr_odm" />
 

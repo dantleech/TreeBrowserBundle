@@ -13,7 +13,7 @@ class TreeModelTypeTest extends BaseTestCase
             ->get('form.factory')
             ->createBuilder('form');
 
-        $fb->add('tree', 'cmf_phpcr_odm_tree')
+        $fb->add('tree', 'cmf_tree_phpcr_odm')
             ->getForm();
 
     }

@@ -15,7 +15,7 @@ use Symfony\Cmf\Bundle\TreeBrowserBundle\Tree\TreeInterface;
  * @author Jacopo Jakuza Romei <jromei@gmail.com>
  * @author Lukas Kahwe Smith <smith@pooteeweet.org>
  */
-class TreeBrowserController
+class TreeController
 {
     /**
      * @var TreeInterface
@@ -118,5 +118,23 @@ class TreeBrowserController
         $this->tree->reorder($parent, $moved, $target, 'before' == $position);
 
         return new Response();
+    }
+
+    /**
+     * Renders a tree
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function treeAction(Request $request)
+    {
+        $root = $request->query->get('root');
+        $selected = $request->query->get('selected') ?: $root;
+
+        return $this->render($this->template, array(
+            'tree' => $this->tree,
+            'root_node' => $root,
+            'selected_node' => $selected,
+        ));
     }
 }

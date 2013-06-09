@@ -6,23 +6,14 @@
 
     <services>
 
-        <service id="sonata.admin.doctrine_phpcr.tree_controller"
-                 class="Sonata\DoctrinePHPCRAdminBundle\Controller\TreeController">
-            <argument type="service" id="sonata.admin.doctrine_phpcr.phpcrodm_tree" />
-            <argument/>
-            <argument>%sonata_admin_doctrine_phpcr.tree_block.defaults%</argument>
-            <argument>%sonata_admin_doctrine_phpcr.tree_confirm_move%</argument>
-            <call method="setContainer"><argument type="service" id="service_container"/></call>
-        </service>
-
-        <service id="sonata.admin.doctrine_phpcr.phpcrodm_tree" class="Sonata\DoctrinePHPCRAdminBundle\Tree\PhpcrOdmTree">
-            <tag name="cmf.tree" alias="phpcr_odm_tree" />
+        <service 
+            id="cmf_tree_browser.phpcr_odm_tree" 
+            class="Symfony\Cmf\Bundle\TreeBrowserBundle\Tree\PhpcrOdmTree"
+            >
             <argument type="service" id="doctrine_phpcr.odm.default_document_manager" />
-            <argument type="service" id="sonata.admin.manager.doctrine_phpcr"/>
-            <argument type="service" id="sonata.admin.pool"/>
             <argument type="service" id="translator"/>
-            <argument type="service" id="templating.helper.assets" strict="false"/>
-            <argument/>
+
+            <tag name="cmf.tree" alias="phpcr_odm_tree" />
         </service>
 
     </services>
